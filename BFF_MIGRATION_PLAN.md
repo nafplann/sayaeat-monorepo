@@ -549,6 +549,7 @@ services/hapi-bff/
 - [x] Copy frontend assets (CSS, JS, images, fonts, source files)
 - [x] Configure environment (stateless BFF, cookie sessions, API keys)
 - [x] Test login/logout (setup complete: automated tests, testing guide, checklist)
+- [x] Fix authentication tests (all 9 tests passing)
 - [ ] Test merchant CRUD
 - [ ] Test menu management
 - [ ] Test order management
@@ -598,6 +599,10 @@ services/hapi-bff/
 - [ ] Remove from Pyramid
 
 ---
+
+COMMIT RULES:
+Dont add more docs, the repo is now bloated by .md
+the commit message should not mention AI assisted.
 
 ## 8. Testing Strategy
 
