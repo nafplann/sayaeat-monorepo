@@ -82,6 +82,6 @@ services:
           path: ./services/merchant-bff/composer.json
           target: /app/composer.json
     ports:
-      - "8001:8000"
+      - "8100:8000"
     volumes:
       - ./services/merchant-bff:/app
