@@ -534,13 +534,19 @@ services/hapi-bff/
 ### Phase 3: Merchant BFF ✓
 - [x] Install shared package
 - [x] Configure pyramid.php config
-- [x] Copy web routes (auth, dashboard, merchants, menus, orders, stores)
-- [x] Copy web controllers (Auth, Dashboard, Merchants, Menus, Orders, Stores)
-- [x] Create PyramidService (Auth, Merchant, Order, Menu, Store)
-- [x] Refactor controllers to use PyramidService (all main controllers done)
-- [ ] Copy views
-- [ ] Copy frontend assets
+- [x] Copy web routes (all routes registered)
+- [x] Copy web controllers (all 26 controllers created)
+- [x] Create all PyramidServices (18 services total)
+- [x] Refactor controllers to use PyramidService (100% complete)
+- [x] Create all missing Internal API controllers in Pyramid (13 controllers)
+- [x] Update internal-api.php routes (all endpoints registered)
+- [x] Create menu/product category controllers
+- [x] Create discount, coupon, promotion controllers
+- [x] Create service-specific order controllers (Kirim/Makan/Market-Aja)
+- [x] Create drivers, roles, users, audit logs controllers
 - [x] Setup authentication flow
+- [ ] Copy views (~88 Blade templates)
+- [ ] Copy frontend assets (CSS, JS, images, fonts)
 - [ ] Test login/logout
 - [ ] Test merchant CRUD
 - [ ] Test menu management
