@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "499ff201ed8537cc67e26201ae6954a0",
+    "content-hash": "e20136e763e353c80ff5818da7d61885",
     "packages": [
         {
             "name": "brick/math",
@@ -3275,6 +3275,43 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
             "time": "2025-09-04T20:59:21+00:00"
+        },
+        {
+            "name": "sayaeat/shared",
+            "version": "dev-feature/bff-plan",
+            "dist": {
+                "type": "path",
+                "url": "../../packages/sayaeat-shared",
+                "reference": "ccfacc1f203b7a9ed7f7b0ab7ca1207d09b04e20"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/http": "^11.0|^12.0",
+                "illuminate/support": "^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "pestphp/pest": "^2.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SayaEat\\Shared\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "SayaEat\\Shared\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "description": "Shared package for SayaEat services (Models, Enums, Utils, DTOs)",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "symfony/clock",
@@ -9301,7 +9338,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "sayaeat/shared": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
