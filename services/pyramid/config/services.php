@@ -36,4 +36,19 @@ return [
         'rest_api_key' => env('ONESIGNAL_REST_API_KEY'),
         'guzzle_client_timeout' => env('ONESIGNAL_GUZZLE_CLIENT_TIMEOUT', 0),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Internal API Keys
+    |--------------------------------------------------------------------------
+    |
+    | API keys for BFF services to authenticate with internal APIs
+    |
+    */
+
+    'internal_api_keys' => array_filter([
+        env('MERCHANT_BFF_API_KEY'),
+        env('HAPI_BFF_API_KEY'),
+        env('HORUS_BFF_API_KEY'),
+    ]),
 ];
