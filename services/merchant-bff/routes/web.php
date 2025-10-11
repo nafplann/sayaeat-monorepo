@@ -65,6 +65,112 @@ Route::group(['middleware' => 'throttle:global'], function () {
         Route::get('customers/datatable', [App\Http\Controllers\CustomersController::class, 'datatable']);
         Route::resource('customers', App\Http\Controllers\CustomersController::class);
 
-        // More routes will be added as we migrate more controllers
+        // Menu Categories
+        Route::get('menu-categories/datatable', [App\Http\Controllers\MenuCategoriesController::class, 'datatable']);
+        Route::get('menu-categories/by-merchant/{id}', [App\Http\Controllers\MenuCategoriesController::class, 'getByMerchant']);
+        Route::resource('menu-categories', App\Http\Controllers\MenuCategoriesController::class);
+
+        // Menu Addon Categories
+        Route::get('menu-addon-categories/datatable', [App\Http\Controllers\MenuAddonCategoriesController::class, 'datatable']);
+        Route::delete('menu-addon-categories/addon-delete/{id}', [App\Http\Controllers\MenuAddonCategoriesController::class, 'addonDelete']);
+        Route::resource('menu-addon-categories', App\Http\Controllers\MenuAddonCategoriesController::class);
+
+        // Product Categories
+        Route::get('product-categories/datatable', [App\Http\Controllers\ProductCategoriesController::class, 'datatable']);
+        Route::get('product-categories/by-merchant/{id}', [App\Http\Controllers\ProductCategoriesController::class, 'getByMerchant']);
+        Route::resource('product-categories', App\Http\Controllers\ProductCategoriesController::class);
+
+        // Product Discounts
+        Route::get('product-discounts/datatable', [App\Http\Controllers\ProductDiscountsController::class, 'datatable']);
+        Route::resource('product-discounts', App\Http\Controllers\ProductDiscountsController::class);
+
+        // Coupons
+        Route::get('coupons/datatable', [App\Http\Controllers\CouponsController::class, 'datatable']);
+        Route::resource('coupons', App\Http\Controllers\CouponsController::class);
+
+        // Promotions
+        Route::get('promotions/datatable', [App\Http\Controllers\PromotionsController::class, 'datatable']);
+        Route::resource('promotions', App\Http\Controllers\PromotionsController::class);
+
+        // Store Orders
+        Route::group(['prefix' => 'store-orders', 'controller' => App\Http\Controllers\StoreOrdersController::class], function () {
+            Route::get('/', 'index');
+            Route::get('datatable', 'datatable');
+            Route::get('list', 'list');
+            Route::post('process/{orderId}', 'process');
+            Route::post('reject/{orderId}', 'reject');
+        });
+
+        // Ongoing Orders
+        Route::get('ongoing-orders', [App\Http\Controllers\OngoingOrdersController::class, 'index']);
+
+        // Kirim-Aja Orders
+        Route::group(['prefix' => 'kirim-aja', 'controller' => App\Http\Controllers\KirimAjaOrdersController::class], function () {
+            Route::get('/', 'index');
+            Route::get('datatable', 'datatable');
+            Route::get('settings', 'settings');
+            Route::get('details/{orderId}', 'details');
+            Route::get('process/{orderId}', 'process');
+            Route::post('update/{orderId}', 'update');
+            Route::post('cancel/{orderId}', 'cancel');
+            Route::post('calculate-fees', 'calculateFees');
+        });
+
+        // Makan-Aja Orders
+        Route::group(['prefix' => 'makan-aja', 'controller' => App\Http\Controllers\MakanAjaOrdersController::class], function () {
+            Route::get('/', 'index');
+            Route::get('datatable', 'datatable');
+            Route::get('settings', 'settings');
+            Route::get('details/{orderId}', 'details');
+            Route::get('process/{orderId}', 'process');
+            Route::post('update/{orderId}', 'update');
+            Route::post('cancel/{orderId}', 'cancel');
+            Route::post('calculate-fees', 'calculateFees');
+        });
+
+        // Market-Aja Orders
+        Route::group(['prefix' => 'market-aja', 'controller' => App\Http\Controllers\MarketAjaOrdersController::class], function () {
+            Route::get('/', 'index');
+            Route::get('datatable', 'datatable');
+            Route::get('settings', 'settings');
+            Route::get('details/{orderId}', 'details');
+            Route::get('process/{orderId}', 'process');
+            Route::post('update/{orderId}', 'update');
+            Route::post('cancel/{orderId}', 'cancel');
+            Route::post('calculate-fees', 'calculateFees');
+        });
+
+        // Shopping Orders
+        Route::get('shopping-orders/fees', [App\Http\Controllers\ShoppingOrdersController::class, 'fees']);
+        Route::get('shopping-orders/datatable', [App\Http\Controllers\ShoppingOrdersController::class, 'datatable']);
+        Route::get('shopping-orders/whatsapp-template', [App\Http\Controllers\ShoppingOrdersController::class, 'whatsappTemplate']);
+        Route::resource('shopping-orders', App\Http\Controllers\ShoppingOrdersController::class);
+
+        // Drivers
+        Route::get('drivers/datatable', [App\Http\Controllers\DriversController::class, 'datatable']);
+        Route::resource('drivers', App\Http\Controllers\DriversController::class);
+
+        // Roles
+        Route::get('roles/datatable', [App\Http\Controllers\RolesController::class, 'datatable']);
+        Route::resource('roles', App\Http\Controllers\RolesController::class);
+
+        // Users
+        Route::get('users/datatable', [App\Http\Controllers\UsersController::class, 'datatable']);
+        Route::resource('users', App\Http\Controllers\UsersController::class);
+
+        // Audit Logs
+        Route::get('audit-logs/datatable', [App\Http\Controllers\AuditLogsController::class, 'datatable']);
+        Route::resource('audit-logs', App\Http\Controllers\AuditLogsController::class);
+
+        // Settings
+        Route::get('settings', [App\Http\Controllers\SettingsController::class, 'index']);
+        Route::post('settings', [App\Http\Controllers\SettingsController::class, 'update']);
+    });
+
+    // Driver Daily Report Routes (Outside manage prefix to match original)
+    Route::group(['prefix' => 'driver-daily-report', 'controller' => App\Http\Controllers\DriverDailyReportController::class], function () {
+        Route::get('/', 'index');
+        Route::get('driver-income', 'income');
+        Route::get('driver-rank', 'driverRank');
     });
 });
