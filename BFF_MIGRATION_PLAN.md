@@ -551,9 +551,9 @@ services/hapi-bff/
 - [x] Test login/logout (setup complete: automated tests, testing guide, checklist)
 - [x] Fix authentication tests (all 9 tests passing)
 - [x] Test merchant CRUD (10 tests passing: datatable, validation, delete, toggle status, auth, error handling)
-- [ ] Test menu management
-- [ ] Test order management
-- [ ] Test store management
+- [x] Test menu management (11 tests passing: datatable, by-merchant, CRUD operations, validation, auth)
+- [x] Test order management (10 tests passing: datatable, list, process/reject, validation, auth)
+- [x] Test store management (10 tests passing: datatable, CRUD operations, toggle status, validation, auth)
 - [ ] Deploy to staging
 - [ ] QA testing
 - [ ] Deploy to production
