@@ -529,18 +529,18 @@ services/hapi-bff/
 - [x] Create Internal Customers controller
 - [x] Add API keys to config
 - [ ] Test internal APIs with Postman
-- [ ] Document internal API endpoints
+- [x] Document internal API endpoints
 
 ### Phase 3: Merchant BFF ✓
-- [ ] Install shared package
-- [ ] Configure pyramid.php config
-- [ ] Copy web routes
-- [ ] Copy web controllers
-- [ ] Create PyramidService
-- [ ] Refactor controllers to use PyramidService
+- [x] Install shared package
+- [x] Configure pyramid.php config
+- [x] Copy web routes (auth, dashboard, merchants, menus, orders, stores)
+- [x] Copy web controllers (Auth, Dashboard, Merchants, Menus, Orders, Stores)
+- [x] Create PyramidService (Auth, Merchant, Order, Menu, Store)
+- [x] Refactor controllers to use PyramidService (all main controllers done)
 - [ ] Copy views
 - [ ] Copy frontend assets
-- [ ] Setup authentication flow
+- [x] Setup authentication flow
 - [ ] Test login/logout
 - [ ] Test merchant CRUD
 - [ ] Test menu management
