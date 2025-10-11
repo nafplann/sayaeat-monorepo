@@ -550,7 +550,7 @@ services/hapi-bff/
 - [x] Configure environment (stateless BFF, cookie sessions, API keys)
 - [x] Test login/logout (setup complete: automated tests, testing guide, checklist)
 - [x] Fix authentication tests (all 9 tests passing)
-- [ ] Test merchant CRUD
+- [x] Test merchant CRUD (10 tests passing: datatable, validation, delete, toggle status, auth, error handling)
 - [ ] Test menu management
 - [ ] Test order management
 - [ ] Test store management
