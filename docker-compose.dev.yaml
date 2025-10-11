@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: "dev-pyramid-mysql"
+    environment:
+      MYSQL_DATABASE: db_wa
+      MYSQL_USER: db_wa
+      MYSQL_PASSWORD: "123qweASD"
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./services/pyramid/database/dump/backup-latest.sql:/docker-entrypoint-initdb.d/backup-latest.sql
+
+  app:
+    build: ./services/pyramid
+    container_name: dev-pyramid-app
+    user: ${CURRENT_UID}
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    tty: true
+    develop:
+      watch:
+        - action: sync
+          path: ./services/pyramid
+          target: /var/www
+          ignore:
+            - /pyramid/vendor
+        - action: sync+restart
+          path: ./services/pyramid/composer.json
+          target: /var/www/composer.json
+    command: >
+      bash -c "php artisan optimize:clear && php-fpm"
+    volumes:
+      - ./services/pyramid:/var/www
+
+  queue:
+    build: ./services/pyramid
+    container_name: dev-pyramid-queue
+    user: ${CURRENT_UID}
+    depends_on:
+      - app
+    restart: unless-stopped
+    command: >
+      bash -c "php artisan optimize:clear &&
+        /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+    volumes:
+      - ./services/pyramid:/var/www
+
+  web_server:
+    build:
+      context: ./services/pyramid
+      dockerfile: nginx.Dockerfile
+    container_name: dev-pyramid-webserver
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/pyramid/storage/app/public:/var/www/public/storage
+
+  merchant-bff:
+    build: ./services/merchant-bff
+    container_name: merchant-bff
+    depends_on:
+      - app
+    restart: unless-stopped
+    tty: true
+    develop:
+      watch:
+        - action: sync
+          path: ./services/merchant-bff
+          target: /app
+          ignore:
+            - /merchant-bff/vendor
+        - action: sync+restart
+          path: ./services/merchant-bff/composer.json
+          target: /app/composer.json
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./services/merchant-bff:/app

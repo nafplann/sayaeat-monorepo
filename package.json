@@ -1,0 +1,23 @@
+{
+  "name": "@sayaeat-monorepo/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "nx": {
+    "targets": {
+      "lint-php-versions": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "./vendor/bin/monorepo-builder validate"
+        }
+      }
+    }
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nx/js": "21.6.2",
+    "@nx/workspace": "21.6.2",
+    "nx": "21.6.2"
+  }
+}

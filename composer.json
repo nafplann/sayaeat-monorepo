@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "symplify/monorepo-builder": "^12.2"
+    }
+}
