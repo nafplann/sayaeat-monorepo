@@ -23,7 +23,20 @@ Route::group(['middleware' => 'throttle:global'], function () {
             return redirect('manage/dashboard')->name('home');
         });
 
-        // Dashboard routes will be added here
-        // More routes will be added as we migrate controllers
+        // Dashboard
+        Route::group(['prefix' => 'dashboard', 'controller' => App\Http\Controllers\DashboardController::class], function () {
+            Route::get('/', 'index');
+            Route::get('get-overview', 'getData');
+            Route::get('get-users-location', 'getUsersLocation');
+            Route::get('daily-revenue', 'dailyRevenue');
+            Route::get('/belanja-aja', 'belanjaAja');
+        });
+
+        // Merchants
+        Route::get('merchants/datatable', [App\Http\Controllers\MerchantsController::class, 'datatable']);
+        Route::get('merchants/toggle-status/{id}', [App\Http\Controllers\MerchantsController::class, 'toggleStatus']);
+        Route::resource('merchants', App\Http\Controllers\MerchantsController::class);
+
+        // More routes will be added as we migrate more controllers
     });
 });
