@@ -1,5 +1,20 @@
 <?php
 
+use App\Http\Controllers\Api\Data\CouponsDataController;
+use App\Http\Controllers\Api\Data\CustomerAddressesDataController;
+use App\Http\Controllers\Api\Data\CustomersDataController;
+use App\Http\Controllers\Api\Data\DriversDataController;
+use App\Http\Controllers\Api\Data\MenuCategoriesDataController;
+use App\Http\Controllers\Api\Data\MenusDataController;
+use App\Http\Controllers\Api\Data\MerchantsDataController;
+use App\Http\Controllers\Api\Data\OrdersDataController;
+use App\Http\Controllers\Api\Data\ProductCategoriesDataController;
+use App\Http\Controllers\Api\Data\ProductsDataController;
+use App\Http\Controllers\Api\Data\PromotionsDataController;
+use App\Http\Controllers\Api\Data\ShipmentOrdersDataController;
+use App\Http\Controllers\Api\Data\StoreOrdersDataController;
+use App\Http\Controllers\Api\Data\StoresDataController;
+use App\Http\Controllers\Api\Data\UsersDataController;
 use App\Http\Controllers\Api\Hapi\CouponsApiController;
 use App\Http\Controllers\Api\Hapi\CustomerAddressesApiController;
 use App\Http\Controllers\Api\Hapi\CustomerAuthApiController;
@@ -17,6 +32,66 @@ use App\Http\Controllers\Api\Horus\DriverAuthApiController;
 use App\Http\Controllers\Api\Horus\UsersApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Data Service API Routes - Used by BFF services
+Route::group(['prefix' => 'data/v1', 'middleware' => ['throttle:global']], function () {
+    // Merchants
+    Route::apiResource('merchants', MerchantsDataController::class);
+    
+    // Menus
+    Route::get('menus/by-merchant/{merchantId}', [MenusDataController::class, 'byMerchant']);
+    Route::post('menus/{id}/toggle-status', [MenusDataController::class, 'toggleStatus']);
+    Route::apiResource('menus', MenusDataController::class);
+    
+    // Menu Categories
+    Route::get('menu-categories/by-merchant/{merchantId}', [MenuCategoriesDataController::class, 'byMerchant']);
+    Route::apiResource('menu-categories', MenuCategoriesDataController::class);
+    
+    // Orders
+    Route::get('orders/by-customer/{customerId}', [OrdersDataController::class, 'byCustomer']);
+    Route::get('orders/by-merchant/{merchantId}', [OrdersDataController::class, 'byMerchant']);
+    Route::post('orders/{id}/update-status', [OrdersDataController::class, 'updateStatus']);
+    Route::apiResource('orders', OrdersDataController::class);
+    
+    // Stores
+    Route::post('stores/{id}/toggle-status', [StoresDataController::class, 'toggleStatus']);
+    Route::apiResource('stores', StoresDataController::class);
+    
+    // Store Orders
+    Route::get('store-orders/by-store/{storeId}', [StoreOrdersDataController::class, 'byStore']);
+    Route::apiResource('store-orders', StoreOrdersDataController::class);
+    
+    // Products
+    Route::get('products/by-store/{storeId}', [ProductsDataController::class, 'byStore']);
+    Route::post('products/{id}/toggle-status', [ProductsDataController::class, 'toggleStatus']);
+    Route::apiResource('products', ProductsDataController::class);
+    
+    // Product Categories
+    Route::apiResource('product-categories', ProductCategoriesDataController::class);
+    
+    // Customers
+    Route::apiResource('customers', CustomersDataController::class);
+    
+    // Customer Addresses
+    Route::get('customer-addresses/by-customer/{customerId}', [CustomerAddressesDataController::class, 'byCustomer']);
+    Route::post('customer-addresses/{id}/set-default', [CustomerAddressesDataController::class, 'setDefault']);
+    Route::apiResource('customer-addresses', CustomerAddressesDataController::class);
+    
+    // Drivers
+    Route::apiResource('drivers', DriversDataController::class);
+    
+    // Users
+    Route::apiResource('users', UsersDataController::class);
+    
+    // Coupons
+    Route::apiResource('coupons', CouponsDataController::class);
+    
+    // Promotions
+    Route::apiResource('promotions', PromotionsDataController::class);
+    
+    // Shipment Orders (Kirim-Aja)
+    Route::apiResource('shipment-orders', ShipmentOrdersDataController::class);
+});
 
 Route::group(['prefix' => 'v1', 'middleware' => ['throttle:global']], function () {
     Route::group(['middleware' => 'guest'], function () {
