@@ -140,15 +140,18 @@
 - ✅ Flash messages for user feedback
 
 **Pending:**
-- ⏳ Copy frontend assets
 - ⏳ Testing
 - ⏳ Deployment
 
-**Views:**
+**Frontend Complete:**
 - ✅ 88 Blade templates copied from Pyramid
 - ✅ All view directories migrated (auth, dashboard, merchants, menus, orders, stores, products, etc.)
+- ✅ All compiled assets copied (CSS ~453KB, JS ~2.2MB, fonts ~2.1MB, images ~1.7MB, favicons)
+- ✅ All source assets copied (~280 files: JS modules, theme vendors, SCSS)
+- ✅ Build configuration copied (webpack.mix.js)
+- ✅ Push notification worker (OneSignal)
 
-**Commits:** 7 commits
+**Commits:** 8 commits
 
 ---
 
@@ -157,14 +160,15 @@
 ```
 Phase 1: Foundation             ████████████████████ 100% ✅
 Phase 2: Pyramid Data Service   ████████████████████ 100% ✅  
-Phase 3: Merchant BFF           ████████████████░░░░  80% 🔄
+Phase 3: Merchant BFF           █████████████████░░░  85% 🔄
   ├─ Backend Complete           ████████████████████ 100% ✅
-  ├─ Views Copied               ████████████████████ 100% ✅
-  └─ Frontend Assets Pending    ░░░░░░░░░░░░░░░░░░░░   0% ⏳
+  ├─ Views Complete             ████████████████████ 100% ✅
+  ├─ Frontend Assets Complete   ████████████████████ 100% ✅
+  └─ Testing Pending            ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Phase 4: Hapi BFF               ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Phase 5: Cleanup                ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 
-Total: 46/61 tasks (75%)
+Total: 47/61 tasks (77%)
 ```
 
 ---

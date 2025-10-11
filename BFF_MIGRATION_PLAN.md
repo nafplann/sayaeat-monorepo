@@ -546,7 +546,7 @@ services/hapi-bff/
 - [x] Create drivers, roles, users, audit logs controllers
 - [x] Setup authentication flow
 - [x] Copy views (~88 Blade templates)
-- [ ] Copy frontend assets (CSS, JS, images, fonts)
+- [x] Copy frontend assets (CSS, JS, images, fonts, source files)
 - [ ] Test login/logout
 - [ ] Test merchant CRUD
 - [ ] Test menu management
