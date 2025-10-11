@@ -510,24 +510,24 @@ services/hapi-bff/
 ## 7. Migration Checklist
 
 ### Phase 1: Foundation ✓
-- [ ] Create `/packages/sayaeat-shared` package
-- [ ] Copy Enums to shared package
-- [ ] Copy Utils to shared package
-- [ ] Create DTOs for API responses
-- [ ] Create PyramidClient base class
-- [ ] Configure monorepo composer.json
-- [ ] Test shared package installation
+- [x] Create `/packages/sayaeat-shared` package
+- [x] Copy Enums to shared package
+- [x] Copy Utils to shared package
+- [x] Create DTOs for API responses
+- [x] Create PyramidClient base class
+- [x] Configure monorepo composer.json
+- [x] Test shared package installation
 
 ### Phase 2: Pyramid Data Service ✓
-- [ ] Create `routes/internal-api.php`
-- [ ] Create API key middleware
-- [ ] Create Internal Auth controller
-- [ ] Create Internal Merchants controller
-- [ ] Create Internal Orders controller
-- [ ] Create Internal Stores controller
-- [ ] Create Internal Products controller
-- [ ] Create Internal Customers controller
-- [ ] Add API keys to config
+- [x] Create `routes/internal-api.php`
+- [x] Create API key middleware
+- [x] Create Internal Auth controller
+- [x] Create Internal Merchants controller
+- [x] Create Internal Orders controller
+- [x] Create Internal Stores controller
+- [x] Create Internal Products controller
+- [x] Create Internal Customers controller
+- [x] Add API keys to config
 - [ ] Test internal APIs with Postman
 - [ ] Document internal API endpoints
 
