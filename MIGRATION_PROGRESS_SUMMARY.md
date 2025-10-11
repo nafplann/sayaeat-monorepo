@@ -140,12 +140,15 @@
 - ✅ Flash messages for user feedback
 
 **Pending:**
-- ⏳ Copy views from Pyramid
 - ⏳ Copy frontend assets
 - ⏳ Testing
 - ⏳ Deployment
 
-**Commits:** 6 commits
+**Views:**
+- ✅ 88 Blade templates copied from Pyramid
+- ✅ All view directories migrated (auth, dashboard, merchants, menus, orders, stores, products, etc.)
+
+**Commits:** 7 commits
 
 ---
 
@@ -154,13 +157,14 @@
 ```
 Phase 1: Foundation             ████████████████████ 100% ✅
 Phase 2: Pyramid Data Service   ████████████████████ 100% ✅  
-Phase 3: Merchant BFF           ███████████████░░░░░  75% 🔄
+Phase 3: Merchant BFF           ████████████████░░░░  80% 🔄
   ├─ Backend Complete           ████████████████████ 100% ✅
-  └─ Frontend Pending           ░░░░░░░░░░░░░░░░░░░░   0% ⏳
+  ├─ Views Copied               ████████████████████ 100% ✅
+  └─ Frontend Assets Pending    ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Phase 4: Hapi BFF               ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 Phase 5: Cleanup                ░░░░░░░░░░░░░░░░░░░░   0% ⏳
 
-Total: 45/61 tasks (74%)
+Total: 46/61 tasks (75%)
 ```
 
 ---

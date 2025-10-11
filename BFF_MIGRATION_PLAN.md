@@ -545,7 +545,7 @@ services/hapi-bff/
 - [x] Create service-specific order controllers (Kirim/Makan/Market-Aja)
 - [x] Create drivers, roles, users, audit logs controllers
 - [x] Setup authentication flow
-- [ ] Copy views (~88 Blade templates)
+- [x] Copy views (~88 Blade templates)
 - [ ] Copy frontend assets (CSS, JS, images, fonts)
 - [ ] Test login/logout
 - [ ] Test merchant CRUD
