@@ -55,6 +55,16 @@ Route::group(['middleware' => 'throttle:global'], function () {
         Route::get('stores/toggle-status/{id}', [App\Http\Controllers\StoresController::class, 'toggleStatus']);
         Route::resource('stores', App\Http\Controllers\StoresController::class);
 
+        // Products
+        Route::get('products/datatable', [App\Http\Controllers\ProductsController::class, 'datatable']);
+        Route::get('products/by-store/{id}', [App\Http\Controllers\ProductsController::class, 'getByStore']);
+        Route::get('products/toggle-status/{id}', [App\Http\Controllers\ProductsController::class, 'toggleStatus']);
+        Route::resource('products', App\Http\Controllers\ProductsController::class);
+
+        // Customers
+        Route::get('customers/datatable', [App\Http\Controllers\CustomersController::class, 'datatable']);
+        Route::resource('customers', App\Http\Controllers\CustomersController::class);
+
         // More routes will be added as we migrate more controllers
     });
 });
