@@ -163,9 +163,9 @@ Route::group(['middleware' => 'throttle:global'], function () {
         Route::resource('audit-logs', App\Http\Controllers\AuditLogsController::class);
 
         // Settings
-        Route::get('settings', [App\Http\Controllers\SettingsController::class, 'index']);
-        Route::post('settings', [App\Http\Controllers\SettingsController::class, 'update']);
-    });
+    Route::get('settings', [App\Http\Controllers\SettingsController::class, 'index']);
+    Route::post('settings', [App\Http\Controllers\SettingsController::class, 'update']);
+});
 
     // Driver Daily Report Routes (Outside manage prefix to match original)
     Route::group(['prefix' => 'driver-daily-report', 'controller' => App\Http\Controllers\DriverDailyReportController::class], function () {
