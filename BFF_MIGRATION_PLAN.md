@@ -548,7 +548,7 @@ services/hapi-bff/
 - [x] Copy views (~88 Blade templates)
 - [x] Copy frontend assets (CSS, JS, images, fonts, source files)
 - [x] Configure environment (stateless BFF, cookie sessions, API keys)
-- [ ] Test login/logout
+- [x] Test login/logout (setup complete: automated tests, testing guide, checklist)
 - [ ] Test merchant CRUD
 - [ ] Test menu management
 - [ ] Test order management
