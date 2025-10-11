@@ -37,6 +37,24 @@ Route::group(['middleware' => 'throttle:global'], function () {
         Route::get('merchants/toggle-status/{id}', [App\Http\Controllers\MerchantsController::class, 'toggleStatus']);
         Route::resource('merchants', App\Http\Controllers\MerchantsController::class);
 
+        // Menus
+        Route::get('menus/datatable', [App\Http\Controllers\MenusController::class, 'datatable']);
+        Route::get('menus/by-merchant/{id}', [App\Http\Controllers\MenusController::class, 'getByMerchant']);
+        Route::get('menus/toggle-status/{id}', [App\Http\Controllers\MenusController::class, 'toggleStatus']);
+        Route::resource('menus', App\Http\Controllers\MenusController::class);
+
+        // Orders
+        Route::get('orders/datatable', [App\Http\Controllers\OrdersController::class, 'datatable']);
+        Route::get('orders/list', [App\Http\Controllers\OrdersController::class, 'list']);
+        Route::post('orders/process/{orderId}', [App\Http\Controllers\OrdersController::class, 'process']);
+        Route::post('orders/reject/{orderId}', [App\Http\Controllers\OrdersController::class, 'reject']);
+        Route::resource('orders', App\Http\Controllers\OrdersController::class);
+
+        // Stores
+        Route::get('stores/datatable', [App\Http\Controllers\StoresController::class, 'datatable']);
+        Route::get('stores/toggle-status/{id}', [App\Http\Controllers\StoresController::class, 'toggleStatus']);
+        Route::resource('stores', App\Http\Controllers\StoresController::class);
+
         // More routes will be added as we migrate more controllers
     });
 });

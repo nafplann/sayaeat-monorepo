@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\MerchantService;
+use App\Services\StoreService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MerchantsController extends Controller
+class StoresController extends Controller
 {
     public function __construct(
-        protected MerchantService $merchantService
+        protected StoreService $storeService
     ) {}
 
     /**
-     * Display a listing of merchants
+     * Display a listing of stores
      */
     public function index(): View
     {
-        return view('merchants.index');
+        return view('stores.index');
     }
 
     /**
-     * Get merchants data for DataTables
+     * Get stores data for DataTables
      */
     public function datatable(Request $request): JsonResponse
     {
@@ -33,21 +33,17 @@ class MerchantsController extends Controller
             $length = $request->input('length', 10);
             $page = ($start / $length) + 1;
 
-            // Get filters from DataTables request
             $filters = [
                 'search' => $request->input('search.value'),
+                'status' => $request->input('status'),
+                'category' => $request->input('category'),
                 'per_page' => $length,
                 'page' => $page,
-                'paginate' => true, // Enable server-side pagination
+                'paginate' => true,
             ];
 
-            if ($request->has('status')) {
-                $filters['status'] = $request->input('status');
-            }
+            $response = $this->storeService->getAll($filters);
 
-            $response = $this->merchantService->getAll($filters);
-
-            // Laravel pagination response format
             return response()->json([
                 'draw' => $request->input('draw'),
                 'recordsTotal' => $response['total'] ?? 0,
@@ -62,126 +58,122 @@ class MerchantsController extends Controller
     }
 
     /**
-     * Show the form for creating a new merchant
+     * Show the form for creating a new store
      */
     public function create(): View
     {
-        return view('merchants.create');
+        return view('stores.create');
     }
 
     /**
-     * Store a newly created merchant
+     * Store a newly created store
      */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:merchants,slug',
+            'slug' => 'required|string|unique:stores,slug',
             'category' => 'required',
             'status' => 'required',
-            'phone_number' => 'required|string',
             'address' => 'nullable|string',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
-            'description' => 'nullable|string',
         ]);
 
         try {
-            $this->merchantService->create($validated);
+            $this->storeService->create($validated);
 
-            return redirect()->route('merchants.index')
-                ->with('success', 'Merchant created successfully');
+            return redirect()->route('stores.index')
+                ->with('success', 'Store created successfully');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Failed to create merchant: ' . $e->getMessage());
+                ->with('error', 'Failed to create store: ' . $e->getMessage());
         }
     }
 
     /**
-     * Display the specified merchant
+     * Display the specified store
      */
     public function show(string $id): View
     {
         try {
-            $merchant = $this->merchantService->getById($id);
+            $store = $this->storeService->getById($id);
 
-            return view('merchants.show', compact('merchant'));
+            return view('stores.show', compact('store'));
         } catch (\Exception $e) {
-            abort(404, 'Merchant not found');
+            abort(404, 'Store not found');
         }
     }
 
     /**
-     * Show the form for editing the specified merchant
+     * Show the form for editing the specified store
      */
     public function edit(string $id): View
     {
         try {
-            $merchant = $this->merchantService->getById($id);
+            $store = $this->storeService->getById($id);
 
-            return view('merchants.edit', compact('merchant'));
+            return view('stores.edit', compact('store'));
         } catch (\Exception $e) {
-            abort(404, 'Merchant not found');
+            abort(404, 'Store not found');
         }
     }
 
     /**
-     * Update the specified merchant
+     * Update the specified store
      */
     public function update(Request $request, string $id): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:merchants,slug,' . $id,
+            'slug' => 'required|string|unique:stores,slug,' . $id,
             'category' => 'required',
             'status' => 'required',
-            'phone_number' => 'required|string',
             'address' => 'nullable|string',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
-            'description' => 'nullable|string',
         ]);
 
         try {
-            $this->merchantService->update($id, $validated);
+            $this->storeService->update($id, $validated);
 
-            return redirect()->route('merchants.index')
-                ->with('success', 'Merchant updated successfully');
+            return redirect()->route('stores.index')
+                ->with('success', 'Store updated successfully');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Failed to update merchant: ' . $e->getMessage());
+                ->with('error', 'Failed to update store: ' . $e->getMessage());
         }
     }
 
     /**
-     * Remove the specified merchant
+     * Remove the specified store
      */
     public function destroy(string $id): RedirectResponse
     {
         try {
-            $this->merchantService->delete($id);
+            $this->storeService->delete($id);
 
-            return redirect()->route('merchants.index')
-                ->with('success', 'Merchant deleted successfully');
+            return redirect()->route('stores.index')
+                ->with('success', 'Store deleted successfully');
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Failed to delete merchant: ' . $e->getMessage());
+                ->with('error', 'Failed to delete store: ' . $e->getMessage());
         }
     }
 
     /**
-     * Toggle merchant status
+     * Toggle store status
      */
     public function toggleStatus(string $id): JsonResponse
     {
         try {
-            $merchant = $this->merchantService->toggleStatus($id);
+            $store = $this->storeService->toggleStatus($id);
 
             return response()->json([
                 'success' => true,
-                'merchant' => $merchant
+                'store' => $store
             ]);
         } catch (\Exception $e) {
             return response()->json([
