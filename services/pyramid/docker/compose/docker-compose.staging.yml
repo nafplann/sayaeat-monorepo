@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  app:
+    image: sjc.vultrcr.com/waregistry/wa-aja/stg-pyramid-app
+    container_name: stg-pyramid-app
+    restart: unless-stopped
+    tty: true
+    env_file: .env.staging
+    network_mode: host
+    command: >
+      bash -c "mkdir -p storage/framework/{sessions,views,cache} &&
+      composer install &&
+      php artisan storage:link &&
+      php artisan migrate &&
+      php artisan cache:clear &&
+      php-fpm"
+    volumes:
+      - ./storage/app:/var/www/storage/app
+
+  queue:
+    image: sjc.vultrcr.com/waregistry/wa-aja/stg-pyramid-app
+    container_name: stg-pyramid-queue
+    depends_on:
+      - app
+    env_file: .env.staging
+    network_mode: host
+    command: >
+      bash -c "mkdir -p storage/framework/{sessions,views,cache} &&
+      composer install &&
+      php artisan storage:link &&
+      php artisan cache:clear &&
+      /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+
+  web_server:
+    image: sjc.vultrcr.com/waregistry/wa-aja/stg-pyramid-webserver
+    container_name: stg-pyramid-webserver
+    restart: unless-stopped
+    tty: true
+    network_mode: host
+    depends_on:
+      - app
+    volumes:
+      - ./storage/app/public:/var/www/public/storage

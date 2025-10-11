@@ -1,0 +1,262 @@
+// Vendor Style
+@import "./vendor";
+
+// Variables
+@import "inc/variables";
+
+// Mixins
+@import "inc/mixins/mixins";
+
+// Bootstrap
+// @import "../vendors/bower_components/bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+
+// Bootstrap overrides
+@import "inc/bootstrap-overrides/dropdown";
+@import "inc/bootstrap-overrides/progress";
+@import "inc/bootstrap-overrides/card";
+@import "inc/bootstrap-overrides/buttons";
+@import "inc/bootstrap-overrides/tables";
+@import "inc/bootstrap-overrides/forms";
+@import "inc/bootstrap-overrides/input-groups";
+@import "inc/bootstrap-overrides/custom-forms";
+@import "inc/bootstrap-overrides/pagination";
+@import "inc/bootstrap-overrides/alerts";
+@import "inc/bootstrap-overrides/close";
+@import "inc/bootstrap-overrides/breadcrumbs";
+@import "inc/bootstrap-overrides/collapse";
+@import "inc/bootstrap-overrides/carousel";
+@import "inc/bootstrap-overrides/modal";
+@import "inc/bootstrap-overrides/popovers";
+@import "inc/bootstrap-overrides/tabs";
+@import "inc/bootstrap-overrides/tooltip";
+
+// Core styles
+@import "inc/fonts";
+@import "inc/generics";
+@import "inc/utilities";
+@import "inc/base";
+@import "inc/list";
+@import "inc/layout";
+@import "inc/misc";
+@import "inc/header";
+@import "inc/footer";
+@import "inc/sidebar";
+@import "inc/chat";
+@import "inc/charts";
+@import "inc/toggle-switch";
+@import "inc/listview";
+@import "inc/toolbars";
+@import "inc/page-loader";
+@import "inc/profile";
+@import "inc/photos";
+@import "inc/contacts";
+@import "inc/groups";
+@import "inc/messages";
+@import "inc/pricing-table";
+@import "inc/invoice";
+@import "inc/login";
+@import "inc/todo";
+@import "inc/notes";
+@import "inc/theme";
+@import "inc/ie-warning";
+@import "inc/error";
+@import "inc/results";
+@import "inc/issue-tracker";
+@import "inc/team";
+@import "inc/blog";
+@import "inc/q-a";
+
+// Widgets
+@import "inc/widgets/past-days";
+@import "inc/widgets/visitors";
+@import "inc/widgets/pie-charts";
+@import "inc/widgets/quick-stats";
+@import "inc/widgets/photos";
+@import "inc/widgets/ratings";
+@import "inc/widgets/profile";
+@import "inc/widgets/contact";
+@import "inc/widgets/signups";
+@import "inc/widgets/time";
+@import "inc/widgets/search";
+
+// Vendor overrides
+@import "inc/vendor-overrides/flot";
+@import "inc/vendor-overrides/sparklines";
+@import "inc/vendor-overrides/select2";
+@import "inc/vendor-overrides/dropzone";
+@import "inc/vendor-overrides/nouislider";
+@import "inc/vendor-overrides/easy-pie-charts";
+@import "inc/vendor-overrides/data-tables";
+@import "inc/vendor-overrides/flatpickr";
+@import "inc/vendor-overrides/bootstrap-colorpicker";
+@import "inc/vendor-overrides/trumbowyg";
+@import "inc/vendor-overrides/fullcalendar";
+@import "inc/vendor-overrides/sweetalert2";
+@import "inc/vendor-overrides/lightgallery";
+@import "inc/vendor-overrides/jquery.scrollbar";
+@import "inc/vendor-overrides/Waves";
+@import "inc/vendor-overrides/jqTree";
+@import "inc/vendor-overrides/rateYo";
+@import "inc/vendor-overrides/jquery-text-counter";
+
+// Another Vendor
+@import '~lightgallery/css/lightgallery.css';
+@import '~video.js/dist/video-js.min.css';
+
+// Main styles
+@import './../css/style';
+
+// Customize by active theme color
+$active-theme: #32c787;
+
+.table-actions button:hover, .table-actions a:hover {
+    background: $active-theme;
+    color: #FFF;
+}
+
+.paginate_button.current {
+    background-color: $active-theme;
+}
+
+.form-group__bar:before, .form-group__bar:after {
+    background-color: $active-theme;
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+.lds-ellipsis div {
+    position: absolute;
+    top: 27px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: $active-theme;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+    left: 45px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(19px, 0);
+    }
+}
+
+.loading {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+.loading div {
+    position: absolute;
+    top: 27px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: $active-theme;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.loading div:nth-child(1) {
+    left: 6px;
+    animation: loading1 0.6s infinite;
+}
+.loading div:nth-child(2) {
+    left: 6px;
+    animation: loading2 0.6s infinite;
+}
+.loading div:nth-child(3) {
+    left: 26px;
+    animation: loading2 0.6s infinite;
+}
+.loading div:nth-child(4) {
+    left: 45px;
+    animation: loading3 0.6s infinite;
+}
+@keyframes loading1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes loading3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes loading2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(19px, 0);
+    }
+}
+
+#realtime-report,
+#realtime-report .card-footer {
+    background-color: $active-theme !important;
+}
+
+#analytics-content .nav-tabs .nav-link:before,
+.nav-tabs--green .nav-link:before,
+.nav-tabs .nav-link:before {
+    background-color: $active-theme;
+}
+
+.nav-tabs--green .nav-link.active,
+.nav-tabs:not([class*=nav-tabs--]) .nav-link.active {
+    color: $active-theme;
+}
+
+.select2-container--default .selection:before,
+.select2-container--default .selection:after {
+    background-color: $active-theme;
+}
+
+// Dark styles
+@import './../css/darkmode';

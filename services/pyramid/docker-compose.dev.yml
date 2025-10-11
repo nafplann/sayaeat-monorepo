@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: "dev-pyramid-mysql"
+    environment:
+      MYSQL_DATABASE: db_wa
+      MYSQL_USER: db_wa
+      MYSQL_PASSWORD: "123qweASD"
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3306:3306"
+    network_mode: host
+    volumes:
+      - ./database/dump/backup-latest.sql:/docker-entrypoint-initdb.d/backup-latest.sql
+
+  app:
+    build: .
+    container_name: dev-pyramid-app
+    depends_on:
+      - mysql
+    restart: unless-stopped
+    tty: true
+    network_mode: host
+    command: >
+      bash -c "mkdir -p storage/framework/{sessions,views,cache} &&
+      cp .env.local .env &&
+      composer install &&
+      php artisan storage:link &&
+      php-fpm"
+    volumes:
+      - ./storage/app:/var/www/storage/app
+
+  queue:
+    build: .
+    container_name: dev-pyramid-queue
+    depends_on:
+      - app
+    restart: unless-stopped
+    network_mode: host
+    command: >
+      bash -c "mkdir -p storage/framework/{sessions,views,cache} &&
+      cp .env.local .env &&
+      composer install &&
+      /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
+
+  web_server:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    container_name: dev-pyramid-webserver
+    restart: unless-stopped
+    tty: true
+    network_mode: host
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage/app/public:/var/www/public/storage
