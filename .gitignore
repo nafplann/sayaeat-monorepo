@@ -10,7 +10,7 @@ node_modules
 vendor
 
 # IDEs and editors
-/.idea
+.idea/
 .project
 .classpath
 .c9/

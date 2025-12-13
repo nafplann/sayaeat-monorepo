@@ -1,9 +1,7 @@
-version: '3'
-
 services:
   mysql:
     image: mysql:8
-    container_name: "dev-pyramid-mysql"
+    container_name: "pyramid-mysql"
     environment:
       MYSQL_DATABASE: db_wa
       MYSQL_USER: db_wa
@@ -16,7 +14,7 @@ services:
 
   app:
     build: ./services/pyramid
-    container_name: dev-pyramid-app
+    container_name: pyramid-app
     user: ${CURRENT_UID}
     depends_on:
       - mysql
@@ -33,36 +31,22 @@ services:
           path: ./services/pyramid/composer.json
           target: /var/www/composer.json
     command: >
-      bash -c "php artisan optimize:clear && php-fpm"
+      bash -c "composer install && php artisan optimize:clear && php artisan serve"
     volumes:
       - ./services/pyramid:/var/www
 
   queue:
     build: ./services/pyramid
-    container_name: dev-pyramid-queue
+    container_name: pyramid-queue
     user: ${CURRENT_UID}
     depends_on:
       - app
     restart: unless-stopped
     command: >
-      bash -c "php artisan optimize:clear &&
+      bash -c "composer install && php artisan optimize:clear &&
         /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf"
     volumes:
       - ./services/pyramid:/var/www
-
-  web_server:
-    build:
-      context: ./services/pyramid
-      dockerfile: nginx.Dockerfile
-    container_name: dev-pyramid-webserver
-    restart: unless-stopped
-    tty: true
-    depends_on:
-      - app
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./services/pyramid/storage/app/public:/var/www/public/storage
 
   merchant-bff:
     build: ./services/merchant-bff
@@ -83,5 +67,7 @@ services:
           target: /app/composer.json
     ports:
       - "8001:8000"
+    command: >
+      bash -c "composer install && php artisan optimize:clear && php artisan serve"
     volumes:
       - ./services/merchant-bff:/app

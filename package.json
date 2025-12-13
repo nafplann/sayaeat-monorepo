@@ -2,7 +2,9 @@
   "name": "@sayaeat-monorepo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "podman compose -f docker-compose.dev.yaml up"
+  },
   "nx": {
     "targets": {
       "lint-php-versions": {

@@ -1,5 +1,6 @@
 {
     "name": "sayaeat/shared",
+    "version": "1.0.0",
     "description": "Shared package for SayaEat services (Models, Enums, Utils, DTOs)",
     "type": "library",
     "license": "proprietary",
