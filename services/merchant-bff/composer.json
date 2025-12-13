@@ -13,7 +13,7 @@
         "laravel/framework": "^12.0",
         "laravel/octane": "^2.12",
         "laravel/tinker": "^2.10.1",
-        "sayaeat/shared": "@dev"
+        "sayaeat/shared": "^1.0.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -88,7 +88,7 @@
     "repositories": {
         "sayaeat-shared": {
             "type": "vcs",
-            "url": "https://github.com/nafplann/sayaeat-monorepo.git"
+            "url": "https://github.com/nafplann/sayaeat-shared.git"
         }
     }
 }
